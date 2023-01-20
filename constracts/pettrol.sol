@@ -16,6 +16,10 @@ contract petrolExchang{
         petrolBalences[address(this)] = 1000;
     }
 
+    function getEthBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
+
     function getPetrolBalences() public view returns(uint256){
         return petrolBalences[address(this)];
     }
@@ -35,7 +39,7 @@ contract petrolExchang{
 
     function sellPetrol(uint256 amount) public payable{
         require(petrolBalences[msg.sender] >= amount,"not enough petrol to sell");
-        require(address(this).balance >= 1, "not enough petrol to bought");
+        require(address(this).balance >= 1, "not enough eth to bought");
 
         petrolBalences[address(this)] += amount;
         petrolBalences[msg.sender] -= amount;
